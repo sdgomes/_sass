@@ -1,0 +1,28 @@
+/**
+    Interpolação é a capacidade de aproximar valores de variaveis em partes te codigo
+**/
+
+
+/**
+    Diretiva Extend, essa diretiva permite que o conteudo de uma classe herde o mesmo estilo para outras classes
+**/
+
+$class: interpolation;
+$property: color;
+div.#{$class} {
+    height: 300px;
+    background-#{$property}: rgb(94, 0, 0);
+    a[href*="#"] {
+        color: white;
+        &:hover {
+            color: rosybrown;
+            font-weight: 900;
+            font-size: 1rem;
+        }
+    }
+    a:not([href*="#"]):hover {
+        @extend a[href*="#"]:hover;
+        font-style: italic;
+        text-decoration: underline;
+    }
+}

@@ -1,0 +1,156 @@
+@charset "UTF-8";
+/** Syntactically Awesome Style Sheets **/
+/* 
+-- Dois tipos de extensão arquivos .sass e .scss
+    .sass usa identação como regra de identificação de objetos e valores
+    .scss usa as diretrizes do css "abertura e fechamento de chaves"    
+    -- Compilação por meio de user: ~$ node-sass diretorioSASS/arquivos.scss diretorioCSS/arquivosaida.css 
+    ou usar uma estensão para vscode "Live Sass Compiler" a saida do arquivo final é sempre no mesmo diretorio.
+*/
+/** Sletores **/
+.App {
+  height: 900px;
+  background: #000052;
+}
+
+.App .child-one {
+  height: 600px;
+  background: #700000;
+}
+
+.App .child-one .child-two {
+  background: #004b00;
+}
+
+/** Propriedades Aninhadas **/
+.nested-property {
+  background-attachment: inherit;
+  background-image: url(https://www.w3schools.com/css/mountain.jpg);
+  background-color: red;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/** Pseudo Class & Elemento **/
+.pseudo-class {
+  position: relative;
+  background-color: greenyellow;
+}
+
+.pseudo-class:hover {
+  background-color: hotpink;
+}
+
+.pseudo-element::before {
+  content: "";
+  width: 100%;
+  height: 20px;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  background-color: indigo;
+}
+
+/**
+    -- @import, serve para  incluir outros arquivos sass dentro de outro arquivo
+        assim é possivel partcionar a aplicação em componentes
+        nomenclatura : _nome-arquivo.scss
+        para importar : @import "caminho/nome-arquivo";
+**/
+.variables {
+  width: initial;
+  background-color: #febfff;
+  border: 3px groove brown;
+}
+
+.variables::before {
+  content: "Esse é o conteúdo";
+}
+
+/**
+    Tipos de dados:
+    Numericos inteiros ou reais
+    String com aspas, apostrofo ou vazio, convenção do CSS usar sempre aspas
+    Cor podem ser rgb ou rgba, hexadecimal e literal "nome da cor"
+**/
+/** Medidas **/
+.margin {
+  height: 100px;
+  background-color: burlywood;
+  margin: 10px 20px 30px 40px;
+}
+
+/**
+    Interpolação é a capacidade de aproximar valores de variaveis em partes te codigo
+**/
+/**
+    Diretiva Extend, essa diretiva permite que o conteudo de uma classe herde o mesmo estilo para outras classes
+**/
+div.interpolation {
+  height: 300px;
+  background-color: #5e0000;
+}
+
+div.interpolation a[href*="#"] {
+  color: white;
+}
+
+div.interpolation a[href*="#"]:hover, div.interpolation a:not([href*="#"]):hover {
+  color: rosybrown;
+  font-weight: 900;
+  font-size: 1rem;
+}
+
+div.interpolation a:not([href*="#"]):hover {
+  font-style: italic;
+  text-decoration: underline;
+}
+
+/**
+    Uso do operador - para criar classes compostas com a opção de concatenação
+**/
+.bg-red {
+  height: 100px;
+  background-color: red;
+}
+
+.bg-green {
+  height: 100px;
+  background-color: green;
+}
+
+.bg-blue {
+  height: 100px;
+  background-color: blue;
+}
+
+/**
+    Mixins é responsavel por criar uma rotina que retorna linhas de codigo para sua classe que inclui essa rotina
+    os valores podem ser pasados por parametro ou não, podem ter uma definição default, para caso vc não queira enviar o valor
+    e pode tbm ter seu valor explicitado pela variavel na chamada da função assim evitando que a ordem dos parametros cause erros
+**/
+.border-radius {
+  border: 5px solid;
+  border-radius: 10px;
+}
+
+.border-radius .child {
+  height: 150px;
+  border: 5px solid;
+  margin: 2.5rem;
+  border-radius: 20px;
+}
+
+/**
+    ** Funções existem funções nativas e funções que podem ser criadas
+    pra criar a função é sempre necessario uma diretiva de retorno
+**/
+/**
+    Placeholder é bem parecido com mixin mas ele é usado para blcos estaticos de codigo
+    sua declaração: %nomedoplaceholder
+**/
+.App .child-one .child-two, .nested-property, .pseudo-class, .variables, .bg, .border-radius {
+  height: 300px;
+}
+/*# sourceMappingURL=default.css.map */

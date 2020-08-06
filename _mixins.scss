@@ -1,0 +1,9 @@
+// ** No mixin tbm é possivel indicar a chegada de uma lista de parametros, assim entao para idicar isso
+// ** basta adicionar três pontos no fim da variavel
+// ** @mixin padding ($values...)
+@mixin border-radius ($radius: 10px) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+    border-radius: $radius;
+}

@@ -1,0 +1,193 @@
+/** Syntactically Awesome Style Sheets **/
+
+
+/* 
+-- Dois tipos de extensão arquivos .sass e .scss
+    .sass usa identação como regra de identificação de objetos e valores
+    .scss usa as diretrizes do css "abertura e fechamento de chaves"    
+    -- Compilação por meio de user: ~$ node-sass diretorioSASS/arquivos.scss diretorioCSS/arquivosaida.css 
+    ou usar uma estensão para vscode "Live Sass Compiler" a saida do arquivo final é sempre no mesmo diretorio.
+*/
+
+
+/** Sletores **/
+
+.App {
+    height: 900px;
+    background: rgb(0, 0, 82);
+    .child-one {
+        height: 600px;
+        background: rgb(112, 0, 0);
+        .child-two {
+            @extend %height;
+            background: rgb(0, 75, 0);
+        }
+    }
+    // Recomendado ter apenas três niveis de herança 
+}
+
+
+/** Propriedades Aninhadas **/
+
+.nested-property {
+    @extend %height;
+    background: {
+        attachment: inherit;
+        image: url(https://www.w3schools.com/css/mountain.jpg);
+        color: red;
+        position: center;
+        size: cover;
+        repeat: no-repeat;
+    }
+}
+
+
+/** Pseudo Class & Elemento **/
+
+.pseudo-class {
+    @extend %height;
+    position: relative;
+    background-color: greenyellow;
+    &:hover {
+        background-color: hotpink;
+    }
+}
+
+.pseudo-element {
+    &::before {
+        content: "";
+        width: 100%;
+        height: 20px;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        background-color: indigo;
+    }
+}
+
+
+/**
+    -- @import, serve para  incluir outros arquivos sass dentro de outro arquivo
+        assim é possivel partcionar a aplicação em componentes
+        nomenclatura : _nome-arquivo.scss
+        para importar : @import "caminho/nome-arquivo";
+**/
+
+@import "variables";
+.variables {
+    @extend %height;
+    width: $width;
+    background-color: $background-color;
+    border: $border;
+    &::before {
+        content: $content;
+    }
+}
+
+
+/**
+    Tipos de dados:
+    Numericos inteiros ou reais
+    String com aspas, apostrofo ou vazio, convenção do CSS usar sempre aspas
+    Cor podem ser rgb ou rgba, hexadecimal e literal "nome da cor"
+**/
+
+// Valores booleanos, null, listas são utilizadas apenas para funções e maps
+// Boolean e Null
+$bool: false;
+$bool: true;
+$value: null;
+//Listas
+$medidas: 10px 20px 30px 40px;
+
+/** Medidas **/
+
+.margin {
+    height: 100px;
+    background-color: burlywood;
+    margin: $medidas;
+}
+
+// Maps
+$medias:( facebook: #3b5998, flickr: #0063db, github: #4183c4, google-plus: #dd4b39, instagram: #517fa4, linkedin: #007bb6, pinterest: #cb2027, twitter: #00aced, youtubbe: #b00);
+@import "interpolation";
+
+/**
+    Uso do operador - para criar classes compostas com a opção de concatenação
+**/
+
+.bg {
+    @extend %height;
+    &-red {
+        height: 100px;
+        background-color: red;
+    }
+    &-green {
+        height: 100px;
+        background-color: green;
+    }
+    &-blue {
+        height: 100px;
+        background-color: blue;
+    }
+}
+
+
+/**
+    Mixins é responsavel por criar uma rotina que retorna linhas de codigo para sua classe que inclui essa rotina
+    os valores podem ser pasados por parametro ou não, podem ter uma definição default, para caso vc não queira enviar o valor
+    e pode tbm ter seu valor explicitado pela variavel na chamada da função assim evitando que a ordem dos parametros cause erros
+**/
+
+@import "mixins";
+.border-radius {
+    @extend %height;
+    border: 5px solid;
+    @include border-radius;
+    .child {
+        height: 150px;
+        border: 5px solid;
+        margin: 2.5rem;
+        @include border-radius(20px);
+    }
+}
+
+
+/**
+    ** Funções existem funções nativas e funções que podem ser criadas
+    pra criar a função é sempre necessario uma diretiva de retorno
+**/
+
+
+/**
+    Placeholder é bem parecido com mixin mas ele é usado para blcos estaticos de codigo
+    sua declaração: %nomedoplaceholder
+**/
+
+%height {
+    height: 300px;
+}
+
+// Interações
+// ** if else (else if)
+//   @if (valor condição valor) {
+//------executa
+//   @else if (valor condição valor) {
+//------executa
+//   @else{
+//------executa
+//  }
+//
+// ** for  "with TO means valor < parada" "with THROUGH means valor <= parada"
+//   @for $incremento from $inicio through $parada {
+//------executa
+//  }
+//
+//  @each $index in $lista {
+//------executa
+//  } 
+//
+//  @while $index > 0 {
+//------executa
+//  $index: $index - decremento;
+//  }
